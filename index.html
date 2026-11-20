@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unanduwa | Hikes, Treks &amp; Camping Tours in Sri Lanka – Concept Demo</title>
+  <meta name="description" content="Unanduwa – one-day hikes, treks and camping trips across Sri Lanka with meals and AC transport. Beyond your expectations.">
+  <!-- Demo only: stops Google from listing this page. REMOVE when the real site goes live. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Archivo+Narrow:wght@500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --night: #10151c;
+      --slate: #1a222c;
+      --slate-2: #232e3a;
+      --mist: #eef1f2;
+      --steel: #9aa7b3;
+      --pin: #e5322d;       /* the red map pin from the logo */
+      --pin-dark: #bf2420;
+      --trail: #f2b233;     /* trail-marker yellow */
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Archivo', sans-serif; background: var(--night); color: var(--mist); }
+    h1, h2, h3, h4 { font-weight: 900; letter-spacing: -.5px; }
+    .mono { font-family: 'Space Mono', monospace; }
+    .narrow { font-family: 'Archivo Narrow', sans-serif; }
+    section { padding: 96px 0; position: relative; }
+    .steel { color: var(--steel); }
+    .text-pin { color: var(--pin) !important; }
+    .text-trail { color: var(--trail) !important; }
+    .kicker { font-family: 'Space Mono', monospace; font-size: .78rem; letter-spacing: 3px; text-transform: uppercase; color: var(--trail); }
+    .kicker::before { content: '▲ '; color: var(--pin); }
+    .title { font-size: clamp(2.3rem, 5.5vw, 4rem); line-height: 1; text-transform: uppercase; }
+
+    /* topographic contour lines */
+    .topo { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.045' stroke-width='1.5'%3E%3Cpath d='M-20 120 C120 40 240 200 380 110 S620 60 640 140'/%3E%3Cpath d='M-20 190 C130 110 250 270 390 180 S620 130 640 210'/%3E%3Cpath d='M-20 270 C110 200 260 340 400 250 S620 210 640 290'/%3E%3Cpath d='M-20 360 C140 280 250 430 410 330 S620 300 640 380'/%3E%3Cpath d='M-20 450 C120 380 270 520 420 420 S620 390 640 470'/%3E%3Cpath d='M-20 540 C150 470 260 610 430 510 S620 480 640 560'/%3E%3Cellipse cx='470' cy='60' rx='70' ry='34'/%3E%3Cellipse cx='470' cy='60' rx='40' ry='18'/%3E%3C/g%3E%3C/svg%3E"); }
+
+    .demo-line { background: var(--trail); color: #111; text-align: center; font-size: .78rem; padding: 6px; font-weight: 700; }
+
+    /* Nav */
+    .navbar { background: rgba(16,21,28,.92); backdrop-filter: blur(8px); border-bottom: 1px solid #263240; }
+    .navbar-brand { display: flex; align-items: center; gap: 10px; color: #fff !important; font-weight: 900; letter-spacing: 3px; }
+    .navbar-brand img { width: 48px; height: 48px; border-radius: 50%; }
+    .navbar .nav-link { color: #cfd6dc !important; font-family: 'Archivo Narrow'; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
+    .navbar .nav-link:hover { color: var(--trail) !important; }
+
+    .btn-pin { background: var(--pin); color: #fff; border: 0; border-radius: 6px; padding: 14px 28px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .btn-pin:hover { background: var(--pin-dark); color: #fff; }
+    .btn-outline-mist { border: 2px solid var(--mist); color: var(--mist); border-radius: 6px; padding: 12px 26px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .btn-outline-mist:hover { background: var(--mist); color: var(--night); }
+
+    /* Hero */
+    .hero { min-height: 94vh; display: flex; align-items: center; overflow: hidden; padding-bottom: 140px;
+      background: radial-gradient(circle at 75% 20%, rgba(242,178,51,.16), transparent 40%), linear-gradient(180deg, #17202b 0%, #10151c 100%); }
+    .hero h1 { font-size: clamp(3.2rem, 9.5vw, 7.4rem); line-height: .9; text-transform: uppercase; }
+    .hero h1 .stroke { color: transparent; -webkit-text-stroke: 2px var(--mist); }
+    .hero .lead { color: var(--steel); max-width: 520px; }
+    .peaks { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 240px; }
+    .hero-logo { width: clamp(200px, 26vw, 330px); border-radius: 50%; border: 3px solid #2b3847; box-shadow: 0 0 0 14px rgba(255,255,255,.03), 0 30px 70px rgba(0,0,0,.6); }
+
+    /* Countdown */
+    .next { background: var(--slate); border: 1px solid #2a3644; border-left: 6px solid var(--pin); border-radius: 10px; padding: 26px 30px; margin-top: -70px; position: relative; z-index: 5; }
+    .cd { display: flex; gap: 10px; }
+    .cd div { background: var(--night); border-radius: 8px; min-width: 70px; padding: 10px 6px; text-align: center; }
+    .cd b { display: block; font-family: 'Space Mono'; font-size: 1.7rem; color: var(--trail); line-height: 1.1; }
+    .cd small { font-size: .65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--steel); }
+
+    /* Trip cards */
+    .filters button { background: transparent; border: 1.5px solid #3a4756; color: var(--mist); border-radius: 50px; padding: 8px 20px; margin: 0 8px 10px 0; font-family: 'Archivo Narrow'; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .filters button.active { background: var(--trail); border-color: var(--trail); color: #111; }
+    .trip { background: var(--slate); border: 1px solid #2a3644; border-radius: 14px; overflow: hidden; height: 100%; display: flex; flex-direction: column; transition: .3s; }
+    .trip:hover { transform: translateY(-6px); border-color: var(--trail); }
+    .trip .ph { aspect-ratio: 16/10; position: relative; display: flex; align-items: center; justify-content: center; flex-direction: column; color: rgba(255,255,255,.75); }
+    .trip .ph i { font-size: 2.6rem; }
+    .trip .datebox { position: absolute; top: 14px; left: 14px; background: var(--night); border-radius: 8px; padding: 8px 12px; text-align: center; line-height: 1; }
+    .trip .datebox b { display: block; font-family: 'Space Mono'; font-size: 1.4rem; color: var(--trail); }
+    .trip .datebox small { font-size: .65rem; letter-spacing: 2px; text-transform: uppercase; }
+    .trip .type { position: absolute; top: 14px; right: 14px; background: var(--pin); font-family: 'Archivo Narrow'; font-weight: 700; font-size: .75rem; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 10px; border-radius: 4px; }
+    .trip .body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+    .trip .where { font-family: 'Space Mono'; font-size: .78rem; color: var(--steel); }
+    .trip ul { list-style: none; padding: 0; margin: 14px 0 20px; color: #c4ccd3; font-size: .95rem; }
+    .trip li { padding: 4px 0; } .trip li i { color: var(--trail); margin-right: 8px; }
+    .trip .price { font-family: 'Space Mono'; font-weight: 700; font-size: 1.5rem; }
+    .trip .price small { font-size: .75rem; color: var(--steel); font-weight: 400; }
+    .g1 { background: linear-gradient(160deg, #3f6b4c, #16281d); } .g2 { background: linear-gradient(160deg, #47566b, #161d28); }
+    .g3 { background: linear-gradient(160deg, #6b6a3f, #25281a); } .g4 { background: linear-gradient(160deg, #3f5f6b, #14222a); }
+
+    /* Included */
+    .inc { background: var(--slate); }
+    .inc-item { text-align: center; padding: 10px; }
+    .inc-item .hex { width: 84px; height: 84px; margin: 0 auto 16px; background: var(--night); border: 2px solid var(--trail); border-radius: 22px; transform: rotate(45deg); display: flex; align-items: center; justify-content: center; }
+    .inc-item .hex i { transform: rotate(-45deg); font-size: 1.8rem; color: var(--trail); }
+
+    /* Past adventures */
+    .adv { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .adv div { aspect-ratio: 1/1; border-radius: 14px; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 16px; font-weight: 700; }
+    .adv div i { position: absolute; top: 14px; right: 14px; font-size: 1.6rem; opacity: .5; }
+    @media (max-width: 767px) { .adv { grid-template-columns: repeat(2, 1fr); } }
+
+    /* Checklist */
+    .pack { background: var(--slate); border: 1px dashed #3a4756; border-radius: 16px; padding: 34px; }
+    .pack label { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #27323f; cursor: pointer; }
+    .pack input { width: 20px; height: 20px; accent-color: var(--trail); }
+    .pack input:checked + span { text-decoration: line-through; color: var(--steel); }
+    .bar { height: 10px; background: var(--night); border-radius: 10px; overflow: hidden; }
+    .bar div { height: 100%; width: 0; background: var(--trail); transition: .3s; }
+
+    /* Contact */
+    .contact { background: var(--pin); color: #fff; border-radius: 22px; padding: 56px; }
+    .contact a { color: #fff; }
+    .contact .btn-dark { background: var(--night); border: 0; border-radius: 6px; padding: 14px 28px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+
+    footer { padding: 34px 0; color: var(--steel); font-size: .9rem; border-top: 1px solid #222c38; }
+    footer img { width: 40px; height: 40px; border-radius: 50%; }
+
+    .wa { position: fixed; right: 20px; bottom: 20px; width: 60px; height: 60px; border-radius: 50%; background: #25d366; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.9rem; z-index: 999; box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+    .wa:hover { color: #fff; transform: scale(1.08); }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: .7s ease; }
+    .reveal.show { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+  <!-- DEMO NOTICE: remove after the owner approves -->
+  <div class="demo-line">CONCEPT DEMO · prepared for Unanduwa · photos and some trip details are samples</div>
+
+  <!-- ===== NAV ===== -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#home"><img src="logo.png" alt="Unanduwa logo"> UNANDUWA</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#trips">Upcoming Trips</a></li>
+          <li class="nav-item"><a class="nav-link" href="#included">What's Included</a></li>
+          <li class="nav-item"><a class="nav-link" href="#adventures">Past Adventures</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pack">Packing List</a></li>
+          <li class="nav-item ms-lg-2"><a class="btn btn-pin btn-sm" href="#trips">Book a Seat</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero topo position-relative" id="home">
+    <div class="container position-relative" style="z-index:3">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-8 reveal">
+          <div class="kicker mb-3">Hikes · Treks · Camping · Sri Lanka</div>
+          <h1>Beyond<br>your <span class="stroke">expec</span><span class="text-pin">tations.</span></h1>
+          <p class="lead my-4">Join our weekend hikes, waterfall treks and camping nights across Sri Lanka. Meals and AC transport are included. Just bring your shoes.</p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#trips" class="btn btn-pin">See Upcoming Trips</a>
+            <a href="https://wa.me/94774903007?text=Hi%20Unanduwa!%20I'd%20like%20to%20join%20a%20trip." target="_blank" class="btn btn-outline-mist"><i class="bi bi-whatsapp me-2"></i>WhatsApp</a>
+          </div>
+        </div>
+        <div class="col-lg-4 text-center reveal"><img src="logo.png" alt="Unanduwa" class="hero-logo"></div>
+      </div>
+    </div>
+    <svg class="peaks" viewBox="0 0 1440 240" preserveAspectRatio="none">
+      <path fill="#1a222c" d="M0,240 L0,170 L160,90 L260,150 L420,40 L560,140 L700,80 L860,170 L1010,60 L1150,150 L1290,100 L1440,170 L1440,240 Z"/>
+      <path fill="#10151c" d="M0,240 L0,210 L200,150 L340,200 L520,120 L700,200 L880,140 L1060,205 L1240,150 L1440,210 L1440,240 Z"/>
+    </svg>
+  </header>
+
+  <!-- ===== NEXT TRIP COUNTDOWN ===== -->
+  <div class="container">
+    <div class="next reveal">
+      <div class="row align-items-center g-3">
+        <div class="col-lg-5"><div class="kicker">Next trip leaves in</div><h3 class="mb-0 mt-1" id="nextName">Loading…</h3><span class="steel mono small" id="nextDate"></span></div>
+        <div class="col-lg-5"><div class="cd"><div><b id="cdD">0</b><small>Days</small></div><div><b id="cdH">0</b><small>Hrs</small></div><div><b id="cdM">0</b><small>Min</small></div><div><b id="cdS">0</b><small>Sec</small></div></div></div>
+        <div class="col-lg-2 text-lg-end"><a href="#trips" class="btn btn-pin">Join</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TRIPS ===== -->
+  <section id="trips" class="topo">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4 reveal">
+        <div><div class="kicker">Trail calendar</div><h2 class="title mt-2 mb-0">Upcoming <span class="text-trail">trips</span></h2></div>
+        <div class="filters">
+          <button class="active" data-f="all">All</button>
+          <button data-f="hike">Day Hikes</button>
+          <button data-f="camp">Camping</button>
+        </div>
+      </div>
+      <div class="row g-4" id="tripGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== INCLUDED ===== -->
+  <section class="inc" id="included">
+    <div class="container">
+      <div class="text-center mb-5 reveal"><div class="kicker">Every package</div><h2 class="title mt-2">What's <span class="text-trail">included</span></h2></div>
+      <div class="row g-4">
+        <div class="col-6 col-lg-3 reveal"><div class="inc-item"><div class="hex"><i class="bi bi-bus-front"></i></div><h5>AC Transport</h5><p class="steel mb-0">Comfortable return travel.</p></div></div>
+        <div class="col-6 col-lg-3 reveal"><div class="inc-item"><div class="hex"><i class="bi bi-egg-fried"></i></div><h5>Meals</h5><p class="steel mb-0">Main meals plus evening tea.</p></div></div>
+        <div class="col-6 col-lg-3 reveal"><div class="inc-item"><div class="hex"><i class="bi bi-signpost-split"></i></div><h5>Trail Guides</h5><p class="steel mb-0">A team that knows the route.</p></div></div>
+        <div class="col-6 col-lg-3 reveal"><div class="inc-item"><div class="hex"><i class="bi bi-people"></i></div><h5>Great Company</h5><p class="steel mb-0">Come solo, leave with friends.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PAST ADVENTURES ===== -->
+  <section id="adventures" class="topo">
+    <div class="container">
+      <div class="row align-items-end g-3 mb-5 reveal">
+        <div class="col-lg-7"><div class="kicker">Trail log</div><h2 class="title mt-2 mb-0">Past <span class="text-trail">adventures</span></h2></div>
+        <div class="col-lg-5"><p class="steel mb-0">Photos from past trips go here. With 500+ posts on Instagram there's plenty to choose from.</p></div>
+      </div>
+      <div class="adv reveal">
+        <div class="g1"><i class="bi bi-image"></i>Sunrise at Ella</div>
+        <div class="g2"><i class="bi bi-image"></i>Yahangala Hike</div>
+        <div class="g3"><i class="bi bi-image"></i>Govinda Hela</div>
+        <div class="g4"><i class="bi bi-image"></i>Horton Plains Camping</div>
+      </div>
+      <div class="text-center mt-5 reveal"><a href="https://www.instagram.com/travel_with_unanduwa/" target="_blank" class="btn btn-outline-mist"><i class="bi bi-instagram me-2"></i>@travel_with_unanduwa</a></div>
+    </div>
+  </section>
+
+  <!-- ===== PACKING LIST ===== -->
+  <section id="pack" class="pt-0">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-5 reveal">
+          <div class="kicker">Before you go</div>
+          <h2 class="title mt-2">Hike <span class="text-trail">packing list</span></h2>
+          <p class="steel">Tick things off as you pack. Your list is saved on this phone, so you can come back to it.</p>
+          <div class="bar mt-4"><div id="packBar"></div></div>
+          <div class="mono small steel mt-2" id="packTxt">0 of 0 packed</div>
+        </div>
+        <div class="col-lg-7 reveal"><div class="pack" id="packList"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="pt-0">
+    <div class="container">
+      <div class="contact reveal">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7">
+            <h2 class="title">Ready for your next trail?</h2>
+            <p class="mt-3 mb-1"><i class="bi bi-telephone-fill me-2"></i><a href="tel:+94774903007" class="text-decoration-none">077 490 3007</a></p>
+            <p class="mb-1"><i class="bi bi-geo-alt-fill me-2"></i>Gedabuwana, Piliyandala</p>
+            <p class="mb-0"><i class="bi bi-instagram me-2"></i><a href="https://www.instagram.com/travel_with_unanduwa/" target="_blank" class="text-decoration-none">@travel_with_unanduwa</a></p>
+          </div>
+          <div class="col-lg-5 text-lg-end">
+            <a href="https://wa.me/94774903007?text=Hi%20Unanduwa!%20I'd%20like%20to%20join%20a%20trip." target="_blank" class="btn btn-dark text-white"><i class="bi bi-whatsapp me-2"></i>Chat on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <span class="d-flex align-items-center gap-2"><img src="logo.png" alt=""> <b class="text-white">UNANDUWA</b> · Beyond your expectations</span>
+      <span>&copy; <span id="yr"></span> Unanduwa</span>
+      <span>Website by Lowamina Pigera</span>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/94774903007" target="_blank" class="wa" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    /* ========== SETTINGS: edit these ========== */
+    const WHATSAPP = '94774903007';
+
+    // Trips. date = 'YYYY-MM-DD'. Trips whose date has passed disappear from the list automatically.
+    // type = 'hike' or 'camp'
+    const TRIPS = [
+      { name: 'Gongala Hike', where: 'Deniyaya', date: '2026-11-14', type: 'hike', label: 'One Day Tour', price: 'LKR 9,800', css: 'g1',
+        includes: ['Nature pool bathing', 'Waterfall hunting', '2 main meals with evening tea', 'AC transport'] },
+      { name: 'Gombaniya', where: 'Knuckles Mountain Range', date: '2026-11-15', type: 'hike', label: 'Sunday Tour', price: 'LKR X,800', css: 'g2',
+        includes: ['Highest peak of the Knuckles range', '2 main meals', 'Return AC transport'] },
+      { name: "Devil's Staircase Trekking", where: 'Lanka Ella & Bambarakanda', date: '2026-11-21', type: 'hike', label: 'One Day Tour', price: 'LKR 10,800', css: 'g3',
+        includes: ["Devil's Staircase trek", 'Lanka Ella & Bambarakanda waterfalls', 'Bathing in a natural pool', 'AC transport, meals & evening tea'] },
+      { name: 'Horton Plains Camping Night', where: 'Horton Plains', date: '2026-12-05', type: 'camp', label: 'Camping', price: 'LKR XX,XXX', css: 'g4',
+        includes: ['Overnight camping', 'Sunrise at the plains', 'Meals included', 'AC transport'] }
+    ];
+
+    const PACKING = ['Hiking shoes with good grip', 'Water bottle (at least 1.5 L)', 'Raincoat or poncho', 'Extra clothes and a towel', 'Leech socks or salt', 'Cap and sunscreen', 'Power bank', 'Personal medicine', 'National ID card'];
+    /* ========================================== */
+
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const start = t => new Date(t.date + 'T05:00:00');           // trips leave early morning
+    const endOfDay = t => new Date(t.date + 'T23:59:59');
+    const upcoming = () => TRIPS.filter(t => endOfDay(t) >= new Date()).sort((a, b) => start(a) - start(b));
+
+    // ---- Trip cards ----
+    function renderTrips(f) {
+      const grid = document.getElementById('tripGrid');
+      const list = upcoming().filter(t => f === 'all' || t.type === f);
+      if (!list.length) {
+        grid.innerHTML = '<div class="col-12"><div class="trip p-5 text-center steel">New trips are announced soon. Follow us on Instagram or message us on WhatsApp.</div></div>';
+        return;
+      }
+      grid.innerHTML = list.map(t => {
+        const d = start(t);
+        const msg = encodeURIComponent(`Hi Unanduwa! I'd like to book a seat for ${t.name} on ${d.getDate()} ${MONTHS[d.getMonth()]}. How many seats are left?`);
+        return `
+        <div class="col-md-6 col-lg-4">
+          <div class="trip">
+            <div class="ph ${t.css}">
+              <div class="datebox"><b>${d.getDate()}</b><small>${MONTHS[d.getMonth()]}</small></div>
+              <span class="type">${t.label}</span>
+              <i class="bi ${t.type === 'camp' ? 'bi-fire' : 'bi-image'}"></i><small class="mt-2">Trip photo</small>
+            </div>
+            <div class="body">
+              <div class="where"><i class="bi bi-geo-alt me-1"></i>${t.where}</div>
+              <h4 class="mt-1">${t.name}</h4>
+              <ul>${t.includes.map(i => `<li><i class="bi bi-check2-circle"></i>${i}</li>`).join('')}</ul>
+              <div class="d-flex justify-content-between align-items-center mt-auto">
+                <div class="price">${t.price}<br><small>per person</small></div>
+                <a href="https://wa.me/${WHATSAPP}?text=${msg}" target="_blank" class="btn btn-pin btn-sm"><i class="bi bi-whatsapp me-1"></i>Book</a>
+              </div>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+    document.querySelectorAll('.filters button').forEach(b => b.addEventListener('click', () => {
+      document.querySelectorAll('.filters button').forEach(x => x.classList.remove('active'));
+      b.classList.add('active'); renderTrips(b.dataset.f);
+    }));
+    renderTrips('all');
+
+    // ---- Countdown to the next trip ----
+    function tick() {
+      const next = upcoming().find(t => start(t) > new Date());
+      const set = (id, v) => document.getElementById(id).textContent = v;
+      if (!next) { set('nextName', 'New trips coming soon'); set('nextDate', ''); ['cdD','cdH','cdM','cdS'].forEach(i => set(i, 0)); return; }
+      const d = start(next), diff = Math.floor((d - new Date()) / 1000);
+      set('nextName', next.name);
+      set('nextDate', `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()} · ${next.where}`);
+      set('cdD', Math.floor(diff / 86400));
+      set('cdH', Math.floor(diff % 86400 / 3600));
+      set('cdM', Math.floor(diff % 3600 / 60));
+      set('cdS', diff % 60);
+    }
+    tick(); setInterval(tick, 1000);
+
+    // ---- Packing checklist (saved on this device) ----
+    const KEY = 'unanduwa-pack';
+    let saved = [];
+    try { saved = JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { saved = []; }
+    const packBox = document.getElementById('packList');
+    packBox.innerHTML = PACKING.map((p, i) => `<label><input type="checkbox" data-i="${i}" ${saved.includes(i) ? 'checked' : ''}><span>${p}</span></label>`).join('');
+    function updatePack() {
+      const boxes = [...packBox.querySelectorAll('input')];
+      const done = boxes.filter(b => b.checked).map(b => +b.dataset.i);
+      document.getElementById('packBar').style.width = (done.length / boxes.length * 100) + '%';
+      document.getElementById('packTxt').textContent = `${done.length} of ${boxes.length} packed`;
+      try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) { /* storage not available */ }
+    }
+    packBox.addEventListener('change', updatePack);
+    updatePack();
+
+    // ---- Reveal on scroll ----
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); }
+    }), { threshold: .1 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
